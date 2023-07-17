@@ -1,5 +1,6 @@
 const meetVersion = "1.2";
 const CDNlink = `https://cdn.jsdelivr.net/gh/Ajithxan/marketrix-live-${meetVersion}/`; //'http://localhost/creativehub/meet-source/'
+
 console.log(CDNlink);
 const startingTime = new Date().getTime();
 const jqueryScript = document.createElement("script");
