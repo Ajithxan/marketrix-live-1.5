@@ -1,4 +1,4 @@
-const meetVersion = "1.3";
+const meetVersion = "1.4";
 const CDNlink = `https://cdn.jsdelivr.net/gh/Ajithxan/marketrix-live-${meetVersion}/`; //'http://localhost/creativehub/meet-source/'
 
 console.log(CDNlink);
