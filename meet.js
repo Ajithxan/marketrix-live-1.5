@@ -1,5 +1,5 @@
-const meetVersion = "0.1.4";
-const CDNlink = `https://cdn.jsdelivr.net/gh/aiyashCreative/meet-snippet${meetVersion}/`; //'http://localhost/creativehub/meet-source/'
+const meetVersion = "1.1";
+const CDNlink = `https://cdn.jsdelivr.net/gh/Ajithxan/marketrix-live-${meetVersion}/`; //'http://localhost/creativehub/meet-source/'
 console.log(CDNlink);
 const startingTime = new Date().getTime();
 const jqueryScript = document.createElement("script");
@@ -292,15 +292,17 @@ const submit = async () => {
   };
 
   const visitorPosition = await getCursorLocation(event);
+  const currentUrl = window.location.origin;
 
   const visitor = {
     name: $("input[name='name']").val(),
-    designation: $("input[name='designation']").val(),
+    //  designation: $("input[name='designation']").val(),
     email: $("input[name='email']").val(),
-    company: $("input[name='company']").val(),
-    phone_no: $("input[name='phone_no']").val(),
+    // company: $("input[name='company']").val(),
+    // phone_no: $("input[name='phone_no']").val(),
     message: $("textarea[name='message']").val(),
-    website_domain: document.location.origin,
+    website_domain: currentUrl,
+    inquiry_type: $("input[name='inquiry_type']").val(),
     visitorDevice: visitorDevice,
     visitorPosition: visitorPosition,
   };
@@ -630,8 +632,6 @@ const meetingObj = {
 };
 
 const sentInquiryToDb = (data) => {
-  let currentUrl = window.location.origin;
-
   let inquiry = {
     name: data.name,
     designation: data.designation,
@@ -639,9 +639,10 @@ const sentInquiryToDb = (data) => {
     email: data.email,
     phone_no: data.phone,
     message: data.message,
-    inquiry_type: data.inquiryType,
+    inquiry_type: data.inquiry_type,
     inquiry_status: "requested",
-    website_domain: currentUrl,
+    website_domain: data.website_domain,
+    visitor_info: data.visitorDevice,
   };
 
   const requestOptions = {
@@ -650,20 +651,11 @@ const sentInquiryToDb = (data) => {
     body: JSON.stringify(inquiry),
   };
 
-  if (
-    data.name === "" ||
-    data.email === "" ||
-    data.message === "" ||
-    data.website_domain === ""
-  ) {
-    alert("Please fill the required fields");
-  } else {
-    fetch(`${serverBaseUrl}meet-live/inquiries/create`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("data", data);
-      });
-  }
+  fetch(`${serverBaseUrl}meet-live/inquiries/create`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("data", data);
+    });
 };
 
 const mouse = {
