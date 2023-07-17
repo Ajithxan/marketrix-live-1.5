@@ -1,4 +1,4 @@
-const meetVersion = "1.2";
+const meetVersion = "1.3";
 const CDNlink = `https://cdn.jsdelivr.net/gh/Ajithxan/marketrix-live-${meetVersion}/`; //'http://localhost/creativehub/meet-source/'
 
 console.log(CDNlink);
@@ -297,13 +297,13 @@ const submit = async () => {
 
   const visitor = {
     name: $("input[name='name']").val(),
-    //  designation: $("input[name='designation']").val(),
+    designation: $("input[name='designation']").val(),
     email: $("input[name='email']").val(),
-    // company: $("input[name='company']").val(),
-    // phone_no: $("input[name='phone_no']").val(),
+    company: $("input[name='company']").val(),
+    phone_no: $("input[name='phone_no']").val(),
     message: $("textarea[name='message']").val(),
     website_domain: currentUrl,
-    inquiry_type: $("input[name='inquiry_type']").val(),
+    inquiry_type: $("select[name='inquiry_type']").find(":selected").val(),
     visitorDevice: visitorDevice,
     visitorPosition: visitorPosition,
   };
