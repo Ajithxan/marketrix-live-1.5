@@ -193,7 +193,11 @@ const getQuery = () => {
 };
 
 const redirectToVisitor = () => { 
+  console.log('redirecting to visitor')
   socket?.on("redirectUserToVisitor", (visitorLocation) => {
+
+    console.log('redirecting to visitor',visitorLocation)
+
     alert(visitorLocation);
   });
   
