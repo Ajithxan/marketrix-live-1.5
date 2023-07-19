@@ -149,6 +149,7 @@ const start = () => {
     });
 
   getQuery();
+  redirectToVisitor()
   // mouse.startMove()
 };
 
@@ -190,6 +191,13 @@ const getQuery = () => {
     }
   }
 };
+
+const redirectToVisitor = () => { 
+  socket?.on("redirectUserToVisitor", (visitorLocation) => {
+    alert(visitorLocation);
+  });
+  
+}
 
 const connectUserToLive = (meetInfo) => {
   console.log("meetInfo", meetInfo);
@@ -293,7 +301,8 @@ const submit = async () => {
   };
 
   const visitorPosition = await getCursorLocation(event);
-  const currentUrl = window.location.origin;
+  const locationOrigin = window.location.origin;
+  const locationHref = window.location.href;
 
   const visitor = {
     name: $("input[name='name']").val(),
@@ -302,10 +311,11 @@ const submit = async () => {
     company: $("input[name='company']").val(),
     phone_no: $("input[name='phone_no']").val(),
     message: $("textarea[name='message']").val(),
-    website_domain: currentUrl,
+    website_domain: locationOrigin,
     inquiry_type: $("select[name='inquiry_type']").find(":selected").val(),
     visitorDevice: visitorDevice,
     visitorPosition: visitorPosition,
+    locationHref: locationHref,
   };
 
   // console.log('visitor', visitor); return
